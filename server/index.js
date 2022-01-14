@@ -17,10 +17,12 @@ app.use('/api/task', task);
 //handle production
 if (process.env.NODE_ENV === 'production') {
     //Static folder
-    app.use(express.static(__dirname + '/public/'));
+    app.use(express.static('client/dist'));
 
     //Handle SPA
-    app.get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
+    app.get('*', (req, res) => {
+        res.sendFile('../client/dist/index,html');
+    });
 }
 
 const port = process.env.PORT || 5000;
