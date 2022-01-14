@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'production') {
 
     //Handle SPA
     app.get('*', (req, res) => {
-        res.sendFile('../client/dist/index,html');
+        res.sendFile('../client/dist/index.html');
     });
 }
 
