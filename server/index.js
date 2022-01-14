@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const task = require('./routes/api/task');
 const cors = require('cors');
+const path = require('path');
+
 const { urlencoded } = require('body-parser');
 
 const app = express()
@@ -18,9 +20,8 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(__dirname + '/public/'));
 
     //Handle SPA
-    app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+    app.get('*', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 }
-
 
 const port = process.env.PORT || 5000;
 
