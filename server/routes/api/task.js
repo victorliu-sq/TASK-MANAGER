@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const express = require('express');
-const mongodb = require('mongodb');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 const dbURL = "mongodb+srv://virtuous:312528@cluster0.g1fqn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 async function loadTask() {
-    const client = await mongodb.MongoClient.connect(dbURL, {useNewUrlParser: true});
+    const client = await mongoose.MongoClient.connect(dbURL, {useNewUrlParser: true});
     collection = client.db('TaskDB').collection('tasks');
     return collection;
 }
