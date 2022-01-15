@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     let newTask = {
         text: req.body.text,
         day: req.body.day,
-        reminder: req.body.reminder === 'true' ? true : false,
+        reminder: req.body.reminder,
     };
     if (!newTask.text || !newTask.day) {
         res.status(400).send('Please enter text and day');
