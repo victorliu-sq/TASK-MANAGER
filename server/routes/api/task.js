@@ -8,9 +8,14 @@ const router = express.Router();
 const dbURL = "mongodb+srv://virtuous:312528@cluster0.g1fqn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 async function loadTask() {
-    const client = await mongodb.MongoClient.connect(dbURL, {useNewUrlParser: true});
-    collection = client.db('TaskDB').collection('tasks');
-    return collection;
+    try {
+        const client = await mongodb.MongoClient.connect(dbURL, {useNewUrlParser: true});
+        collection = client.db('TaskDB').collection('tasks');
+        console.log('DB CONNECTED SUCCESSFULLY');
+        return collection;   
+    } catch(err){
+        console.log('DB CANNOT BE CONNECTED');
+    }
 }
 
 //Get task
