@@ -13,16 +13,30 @@ async function loadTask() {
     return collection;
 }
 
-const tasks = await loadTask();
+const connectDB = async () => {
+    try {
+      await mongodb.MongoClient.connect(dbURL, {
+        useNewUrlParser: true,
+      });
+      console.log("MongoDB Connection Success 👍");
+    } catch (error) {
+      console.log("MongoDB Connection Failed 💥");
+      process.exit(1);
+    }
+};
+
+connectDB();
 
 //Get task
 router.get('/', async (req, res) => {
+    const tasks = await loadTask();
     res.send(await tasks.find().toArray());
 });
 
 
 //Add task
 router.post('/', async (req, res) => {
+    const tasks = await loadTask();
     let newTask = {
         text: req.body.text,
         day: req.body.day,
@@ -38,12 +52,14 @@ router.post('/', async (req, res) => {
 
 //Delete task
 router.delete('/:id', async (req, res) => {
+    const tasks = await loadTask();
     await tasks.deleteOne({_id: mongodb.ObjectId(req.params.id)});
     res.status(200).send('delete successfully');
 });
 
 //Update reminder of task
 router.put('/reminder/:id', async (req, res) => {
+    const tasks = await loadTask();
     const task = await tasks.findOne({_id: mongodb.ObjectId(req.params.id)});
     await tasks.updateOne(
         {_id: mongodb.ObjectId(req.params.id)},
