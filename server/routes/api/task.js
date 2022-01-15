@@ -13,20 +13,6 @@ async function loadTask() {
     return collection;
 }
 
-const connectDB = async () => {
-    try {
-      await mongodb.MongoClient.connect(dbURL, {
-        useNewUrlParser: true,
-      });
-      console.log("MongoDB Connection Success 👍");
-    } catch (error) {
-      console.log("MongoDB Connection Failed 💥");
-      process.exit(1);
-    }
-};
-
-connectDB();
-
 //Get task
 router.get('/', async (req, res) => {
     const tasks = await loadTask();
