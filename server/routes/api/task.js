@@ -39,16 +39,16 @@ router.post('/', async (req, res) => {
 //Delete task
 router.delete('/:id', async (req, res) => {
     const tasks = await loadTask();
-    await tasks.deleteOne({_id: mongodb.ObjectId(req.params.id)});
+    await tasks.deleteOne({_id: mongoose.ObjectId(req.params.id)});
     res.status(200).send('delete successfully');
 });
 
 //Update reminder of task
 router.put('/reminder/:id', async (req, res) => {
     const tasks = await loadTask();
-    const task = await tasks.findOne({_id: mongodb.ObjectId(req.params.id)});
+    const task = await tasks.findOne({_id: mongoose.ObjectId(req.params.id)});
     await tasks.updateOne(
-        {_id: mongodb.ObjectId(req.params.id)},
+        {_id: mongoose.ObjectId(req.params.id)},
         {
             $set: {
                 reminder: !task.reminder
