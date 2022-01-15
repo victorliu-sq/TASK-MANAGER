@@ -1,6 +1,6 @@
 const uuid = require('uuid');
 const express = require('express');
-const mongoose = require('mongoose');
+const mongodb = require('mongodb');
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 const dbURL = "mongodb+srv://virtuous:312528@cluster0.g1fqn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 async function loadTask() {
-    const client = await mongoose.MongoClient.connect(dbURL, {useNewUrlParser: true});
+    const client = await mongodb.MongoClient.connect(dbURL, {useNewUrlParser: true});
     collection = client.db('TaskDB').collection('tasks');
     return collection;
 }
@@ -39,16 +39,16 @@ router.post('/', async (req, res) => {
 //Delete task
 router.delete('/:id', async (req, res) => {
     const tasks = await loadTask();
-    await tasks.deleteOne({_id: mongoose.ObjectId(req.params.id)});
+    await tasks.deleteOne({_id: mongodb.ObjectId(req.params.id)});
     res.status(200).send('delete successfully');
 });
 
 //Update reminder of task
 router.put('/reminder/:id', async (req, res) => {
     const tasks = await loadTask();
-    const task = await tasks.findOne({_id: mongoose.ObjectId(req.params.id)});
+    const task = await tasks.findOne({_id: mongodb.ObjectId(req.params.id)});
     await tasks.updateOne(
-        {_id: mongoose.ObjectId(req.params.id)},
+        {_id: mongodb.ObjectId(req.params.id)},
         {
             $set: {
                 reminder: !task.reminder
