@@ -1,3 +1,7 @@
+This app is displayed at: https://jiaxin-task-manager.herokuapp.com/
+
+
+
 # Initialization of Git
 
 1. right click app folder and git bash it
@@ -32,8 +36,11 @@
    ```
    git remote add origin https://github.com/victorliu-sq/task-manager.git
    git push -u origin main
+   
+   forcely push
+   git push -f origin main
    ```
-
+   
    
 
 
