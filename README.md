@@ -41,9 +41,6 @@ This app is displayed at: https://jiaxin-task-manager.herokuapp.com/
    git push -f origin main
    ```
    
-   
-
-
 
 
 
