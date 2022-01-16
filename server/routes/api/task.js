@@ -5,8 +5,6 @@ const mongodb = require('mongodb');
 const router = express.Router();
 
 //Connect to Database
-const dbURL = "mongodb+srv://virtuous:312528@cluster0.g1fqn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
 async function loadTask() {
     try {
         const client = await mongodb.MongoClient.connect(process.env.dbURL, {useNewUrlParser: true});
